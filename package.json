@@ -1,0 +1,20 @@
+{
+  "name": "smovie",
+  "version": "0.0.1",
+  "description": "Movie REST API project with Javascript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chrysz/SMovie.git"
+  },
+  "keywords": [],
+  "author": "Chrysz <csotorepol@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chrysz/SMovie/issues"
+  },
+  "homepage": "https://github.com/Chrysz/SMovie#readme"
+}
