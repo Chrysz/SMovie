@@ -1,3 +1,7 @@
-import { API_KEY, API_NAME } from './secret.js'
+const chkHamburgerMenu = document.querySelector('.nav-container .nav-left .nav-hamburger-menu .nav-checkbox');
+const leftMenuContainer = document.querySelector('.left-menu-container');
 
-console.log('Hello World')
+chkHamburgerMenu.addEventListener('click', event => {
+    console.log('asdfasdf');
+    leftMenuContainer.classList.toggle('inactive');
+})
