@@ -248,12 +248,14 @@ body {
 .left-menu-container {
     background-color: var(--blue-dark);
     width: 200px;
+    height: 100%;
     position: absolute;
     padding-top: 10px;
     top: 0px;
     bottom: 0;
     z-index: 1;
     box-shadow: 2px 0px 0px rgb(146 161 176 / 15%);
+    overflow-y: scroll;
 }
 .left-menu-container .left-menu-title {
     height: 50px;
