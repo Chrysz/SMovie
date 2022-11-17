@@ -1,5 +1,11 @@
-const API_BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+const axiosApi = axios.create({
+    baseURL: 'https://api.themoviedb.org/3/',
+    params: {
+        'api_key': API_KEY
+    }
+});
 
 const chkHamburgerMenu = document.querySelector('.nav-container .nav-left .nav-hamburger-menu .nav-checkbox');
 const leftMenuContainer = document.querySelector('.left-menu-container');
@@ -9,8 +15,7 @@ chkHamburgerMenu.addEventListener('click', event => {
 })
 
 async function getTrendingMoviesPreview() {
-    const res = await fetch(`${API_BASE_URL}/trending/movie/day?api_key=${API_KEY}`);
-    const data = await res.json();
+    const { data } = await axiosApi('trending/movie/day');
 
     const movies = data.results;
     
@@ -26,8 +31,8 @@ async function getTrendingMoviesPreview() {
 }
 
 async function getCategoriesPreview() {
-    const res = await fetch(`${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}`);
-    const data = await res.json();
+    const { data } = await axiosApi('/genre/movie/list');
+
     const categories = data.genres;
     const leftMenuCategories = document.querySelector('.left-menu-container .left-menu-categories');
     categories.forEach(category => {
@@ -41,8 +46,8 @@ async function getCategoriesPreview() {
 
 async function getPopularMovies() {
     try {
-        const res = await fetch(`${API_BASE_URL}/movie/popular?api_key=${API_KEY}`);
-        const data = await res.json(); 
+        const { data } = await axiosApi('/movie/popular');
+
         const movies = data.results;
         const trailerContainer = document.querySelector('.trailer-container .trailer-preview');
         movies.forEach(movie => {
@@ -57,7 +62,3 @@ async function getPopularMovies() {
         console.error(error)
     }
 }
-
-getTrendingMoviesPreview();
-getCategoriesPreview();
-getPopularMovies();
