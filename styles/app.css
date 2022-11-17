@@ -62,12 +62,6 @@ body {
     position: absolute;
     z-index: 2;
 }
-.nav-container .nav-left .nav-hamburger-menu .nav-hamburger-line span {
-    height: 2px;
-    width: 100%;
-    background: var(--gray);
-    display: block;
-}
 /* navbar-lines */
 .nav-container .nav-left .nav-hamburger-menu .nav-hamburger-line .nav-line1 {
     transform-origin: 0% 0%;
@@ -202,6 +196,12 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+}
+.detailBackground .detail-arrow {
+    display: inline-block;
+    border-style: none;
+    font-size: 40px;
+    padding: 10px 0 0 10px;
 }
 .movieDetail-container {
     background-color: var(--blue-dark);
