@@ -158,9 +158,22 @@ body {
 .trending-container {
     padding: 10px;
 }
-.trending-container .trending-title {
+.trending-container .trending-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.trending-container .trending-title-container .trending-title {
     font-size: 24px;
     font-weight: var(--font-weight-bold);
+}
+.trending-container .trending-title-container .trending-view-more {
+    background: var(--blue);
+    border: 0;
+    color: var(--gray);
+    font-weight: var(--font-weight-medium);
+    border-radius: 8px;
+    padding: 8px;
 }
 .trending-container .trending-preview {
     display: flex;
