@@ -14,6 +14,7 @@ navChkHamburgerMenu.addEventListener('click', event => {
 async function getTrendingMoviesPreview() {
     const { data } = await axiosApi('trending/movie/day');
 
+    trendingPreview.innerHTML = '';
     const movies = data.results;
     movies.forEach(movie => {
         const movieImg = document.createElement('img');
@@ -28,6 +29,7 @@ async function getTrendingMoviesPreview() {
 async function getCategoriesPreview() {
     const { data } = await axiosApi('/genre/movie/list');
 
+    leftMenuCategories.innerHTML = '';
     const categories = data.genres;
     categories.forEach(category => {
         const categoryText = document.createElement('text');
@@ -42,6 +44,7 @@ async function getPopularMovies() {
     try {
         const { data } = await axiosApi('/movie/popular');
 
+        trailerPreview.innerHTML = '';
         const movies = data.results;
         movies.forEach(movie => {
             const previewImg = document.createElement('img');

@@ -8,6 +8,7 @@ window.addEventListener('hashchange', navigator, false)
 
 function navigator() {
     console.log(location);
+    navChkHamburgerMenu.checked = false;
     getCategoriesPreview();
     if (location.hash.startsWith('#trends')){
         trendsPage();
