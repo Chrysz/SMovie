@@ -78,3 +78,13 @@ async function getMoviesByCategory(categoryId) {
     const movies = data.results;
     createMovies(movies, categoryPreview);
 }
+
+async function searchMovies(query) {
+    const { data } = await axiosApi('/search/movie', {
+        params: {
+            'query': query
+        }
+    });
+    const movies = data.results;
+    createMovies(movies, categoryPreview);
+}

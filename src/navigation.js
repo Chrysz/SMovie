@@ -1,5 +1,7 @@
 // Button event
-searchButton.addEventListener('click', () => location.hash = '#search=');
+searchButton.addEventListener('click', () => {
+    location.hash = `#search=${searchInput.value}`;
+});
 trendingButton.addEventListener('click', () => location.hash = '#trends');
 headerArrowButton.addEventListener('click', () => location.hash = '#home');
 
@@ -51,6 +53,7 @@ function searchPage() {
 
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
+    headerTittle.classList.add('inactive');
     searchContainer.classList.remove('inactive');
     trendingContainer.classList.add('inactive');
     trailerContainer.classList.add('inactive');
@@ -58,6 +61,10 @@ function searchPage() {
     movieDetailContainer.classList.add('inactive');
     leftMenuContainer.classList.add('inactive')
     categoryContainer.classList.remove('inactive');
+
+    //['#search', 'query']
+    const [ _ , query ] = location.hash.split('=');
+    searchMovies(query);
 }
 function movieDetailPage() {
     console.log('MOVIE DETAIL!!!');
@@ -77,6 +84,7 @@ function categoryPage() {
 
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
+    headerTittle.classList.remove('inactive');  
     searchContainer.classList.add('inactive');
     trendingContainer.classList.add('inactive');
     trailerContainer.classList.add('inactive');

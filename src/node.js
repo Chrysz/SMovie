@@ -11,6 +11,7 @@ const headerTittle = document.querySelector('.header-container .category-title')
 
 //#region Search Container
 const searchContainer = document.querySelector('.search-container');
+const searchInput = document.querySelector('.search-container .search-form input[type="text"]');
 const searchButton = document.querySelector('.search-container .search-form > button');
 //#endregion Search Container
 
