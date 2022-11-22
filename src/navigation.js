@@ -1,3 +1,8 @@
+// Button event
+searchButton.addEventListener('click', () => location.hash = '#search=');
+trendingButton.addEventListener('click', () => location.hash = '#trends');
+headerArrowButton.addEventListener('click', () => location.hash = '#home');
+
 window.addEventListener('load', navigator, false)
 window.addEventListener('hashchange', navigator, false)
 

@@ -5,15 +5,18 @@ const navChkHamburgerMenu = document.querySelector('.nav-container .nav-left .na
 
 //#region Header Container
 const headerContainer = document.querySelector('.header-container');
+const headerArrowButton = document.querySelector('.header-container .category-arrow');
 //#endregion Header Container
 
 //#region Search Container
 const searchContainer = document.querySelector('.search-container');
+const searchButton = document.querySelector('.search-container .search-form > button');
 //#endregion Search Container
 
 //#region Trending Container
 const trendingContainer = document.querySelector('.trending-container');
 const trendingPreview = document.querySelector('.trending-container .trending-preview');
+const trendingButton = document.querySelector('.trending-container .trending-title-container .trending-view-more');
 //#endregion Trending Container
 
 //#region Trailer Container

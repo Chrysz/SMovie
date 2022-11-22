@@ -110,6 +110,9 @@ body {
     padding: 10px 0 0 10px;
     gap: 20px;
 }
+.header-container .category-arrow {
+    cursor: pointer;
+}
 /*#endregion header container*/
 /*#region searchBar*/
 .search-container {
@@ -148,6 +151,7 @@ body {
     border-style: none;
     border-radius: 0px 8px 8px 0px;
     padding: 10px;
+    cursor: pointer;
 }
 .search-container .search-form > button > i {
     font-size: large;
@@ -171,9 +175,10 @@ body {
     background: var(--blue);
     border: 0;
     color: var(--gray);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     border-radius: 8px;
     padding: 8px;
+    cursor: pointer;
 }
 .trending-container .trending-preview {
     display: flex;
