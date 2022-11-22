@@ -300,6 +300,7 @@ body {
     flex-direction: column;
     gap: 32px;
     padding: 0 20px;
+    cursor: pointer;
 }
 .left-menu-container .left-menu-categories > text {
     font-size: 15px;

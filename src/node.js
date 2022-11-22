@@ -6,6 +6,7 @@ const navChkHamburgerMenu = document.querySelector('.nav-container .nav-left .na
 //#region Header Container
 const headerContainer = document.querySelector('.header-container');
 const headerArrowButton = document.querySelector('.header-container .category-arrow');
+const headerTittle = document.querySelector('.header-container .category-title');{}
 //#endregion Header Container
 
 //#region Search Container
@@ -39,4 +40,5 @@ const leftMenuCategories = document.querySelector('.left-menu-container .left-me
 
 //#region Category Container
 const categoryContainer = document.querySelector('.category-container');
+const categoryPreview = document.querySelector('.category-container .category-preview');
 //#endregion Category Container

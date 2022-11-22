@@ -7,6 +7,33 @@ const axiosApi = axios.create({
     }
 });
 
+// Utils
+function createMovies(movies, container)
+{
+    container.innerHTML = '';
+    movies.forEach(movie => {
+        const previewImg = document.createElement('img');
+        previewImg.classList.add('movie-img');
+        previewImg.setAttribute('alt', movie.name);
+        previewImg.setAttribute('src', `${IMG_BASE_URL}/${movie.poster_path}`);
+
+        container.appendChild(previewImg);
+    });
+}
+function createCategories(categories, container){
+    container.innerHTML = '';
+    categories.forEach(category => {
+        const categoryText = document.createElement('text');
+        categoryText.classList.add('left-menu-category');
+        categoryText.setAttribute('id', category.id);
+        categoryText.textContent = category.name
+        categoryText.addEventListener('click', () => location.hash = `#category=${category.id}-${category.name}`);
+        container.appendChild(categoryText);
+    });
+}
+
+
+// Llamados API
 navChkHamburgerMenu.addEventListener('click', event => {
     leftMenuContainer.classList.toggle('inactive');
 })
@@ -28,33 +55,26 @@ async function getTrendingMoviesPreview() {
 
 async function getCategoriesPreview() {
     const { data } = await axiosApi('/genre/movie/list');
-
-    leftMenuCategories.innerHTML = '';
     const categories = data.genres;
-    categories.forEach(category => {
-        const categoryText = document.createElement('text');
-        categoryText.classList.add('left-menu-category');
-        categoryText.setAttribute('id', category.id);
-        categoryText.textContent = category.name
-        leftMenuCategories.appendChild(categoryText);
-    });
+    createCategories(categories, leftMenuCategories);
 }
 
 async function getPopularMovies() {
     try {
         const { data } = await axiosApi('/movie/popular');
-
-        trailerPreview.innerHTML = '';
         const movies = data.results;
-        movies.forEach(movie => {
-            const previewImg = document.createElement('img');
-            previewImg.classList.add('movie-img');
-            previewImg.setAttribute('alt', movie.name);
-            previewImg.setAttribute('src', `${IMG_BASE_URL}/${movie.poster_path}`);
-
-            trailerPreview.appendChild(previewImg);
-        });
+        createMovies(movies, trailerPreview);
     } catch (error) {
         console.error(error)
     }
+}
+
+async function getMoviesByCategory(categoryId) {
+    const { data } = await axiosApi('discover/movie', {
+        params: {
+            'with_genres': categoryId
+        }
+    });
+    const movies = data.results;
+    createMovies(movies, categoryPreview);
 }
