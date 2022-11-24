@@ -90,11 +90,17 @@ body {
 .nav-container .nav-left .nav-hamburger-menu input[type="checkbox"]:checked ~ .nav-hamburger-line .nav-line3 {
     transform: rotate(-45deg);
 }
-.nav-container .nav-title {
+.nav-container .nav-title-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-container .nav-title {
     font-weight: var(--font-weight-bold);
     font-size: 30px;
     text-align: center;
+    cursor: pointer;
 }
 .nav-container .nav-title::before {
     font-family: "FontAwesome";
@@ -307,15 +313,15 @@ body {
     font-weight: var(--font-weight-medium);
 }
 /*#endregion left-menu*/
-/*#region category-container */
-.category-container {
+/*#region generic-container */
+.generic-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
     padding: 10px;
 }
-.category-container .category-preview {
+.generic-container .generic-preview {
     display: grid;
     grid-template-columns: repeat(auto-fill, 190px);
     row-gap: 10px;
@@ -323,11 +329,11 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-.category-container .category-preview img {
+.generic-container .generic-preview img {
     width: 190px;
     height: 290px;
 }
-/*#endregion category-container*/
+/*#endregion generic-container*/
 
 
 .inactive {

@@ -40,17 +40,14 @@ navChkHamburgerMenu.addEventListener('click', event => {
 
 async function getTrendingMoviesPreview() {
     const { data } = await axiosApi('trending/movie/day');
-
-    trendingPreview.innerHTML = '';
     const movies = data.results;
-    movies.forEach(movie => {
-        const movieImg = document.createElement('img');
-        movieImg.classList.add('movie-img');
-        movieImg.setAttribute('alt', movie.title);
-        movieImg.setAttribute('src', `${IMG_BASE_URL}/${movie.poster_path}`);
+    createMovies(movies, trendingPreview);
+}
 
-        trendingPreview.appendChild(movieImg);
-    });
+async function getTrendingMovies() {
+    const { data } = await axiosApi('trending/movie/day');
+    const movies = data.results;
+    createMovies(movies, genericPreview)
 }
 
 async function getCategoriesPreview() {
@@ -76,7 +73,7 @@ async function getMoviesByCategory(categoryId) {
         }
     });
     const movies = data.results;
-    createMovies(movies, categoryPreview);
+    createMovies(movies, genericPreview);
 }
 
 async function searchMovies(query) {
@@ -86,5 +83,5 @@ async function searchMovies(query) {
         }
     });
     const movies = data.results;
-    createMovies(movies, categoryPreview);
+    createMovies(movies, genericPreview);
 }

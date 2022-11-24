@@ -1,5 +1,6 @@
 //#region Navbar
 const navbar = document.querySelector('.nav-container');
+const navTitle = document.querySelector('.nav-container .nav-title');
 const navChkHamburgerMenu = document.querySelector('.nav-container .nav-left .nav-hamburger-menu .nav-checkbox');
 //#endregion Navbar
 
@@ -39,7 +40,7 @@ const leftMenuContainer = document.querySelector('.left-menu-container');
 const leftMenuCategories = document.querySelector('.left-menu-container .left-menu-categories');
 //#endregion Left Menu Container
 
-//#region Category Container
-const categoryContainer = document.querySelector('.category-container');
-const categoryPreview = document.querySelector('.category-container .category-preview');
-//#endregion Category Container
+//#region Generic Container
+const genericContainer = document.querySelector('.generic-container');
+const genericPreview = document.querySelector('.generic-container .generic-preview');
+//#endregion Generic Container
