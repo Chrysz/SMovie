@@ -310,7 +310,23 @@ body {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    overflow-y: scroll;
+    overflow-x: scroll;
+}
+.movieDetail-container .movieDetail-similar::-webkit-scrollbar {
+    height: 0px;
+}
+.movieDetail-container .movieDetail-similar:hover::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border: .1px solid var(--blue-dark);
+}
+.movieDetail-container .movieDetail-similar::-webkit-scrollbar-thumb {
+    background: var(--blue-water);
+    border-radius: 5px;
+}
+.movieDetail-container .movieDetail-similar::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .movieDetail-container .movieDetail-similar img {
     width: 120px;

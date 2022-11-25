@@ -93,7 +93,6 @@ async function getMovieById(id) {
     
     // se renombra data a movie
     const { data: movie } = await axiosApi(`/movie/${id}`);
-    console.log(movie);
 
     detailBackground.style.background = `
         linear-gradient(
@@ -107,6 +106,7 @@ async function getMovieById(id) {
     movieDetailScore.innerHTML = movie.vote_average;
     movieDetailDescription.innerHTML = movie.overview;
     movieDetailCategory.innerHTML = movie.genres.map((gen) => gen.name).join(',');
+    getRelatedMovieById(movie.id);
 }
 
 function clearMovieDetail() {
@@ -122,4 +122,11 @@ function clearMovieDetail() {
             rgba(0,0,0,0) 29.17%
         )
     `
+}
+
+async function getRelatedMovieById(id){
+    const { data } = await axiosApi(`/movie/${id}/recommendations`);
+    const relatedMovies = data.results;
+
+    createMovies(relatedMovies, movieDetailSimilar);
 }
