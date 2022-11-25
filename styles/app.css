@@ -193,6 +193,22 @@ body {
     padding-top: 10px;
     overflow-x: scroll;
 }
+.trending-container .trending-preview::-webkit-scrollbar {
+    height: 0px;
+}
+.trending-container .trending-preview:hover::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border: .1px solid var(--blue-dark);
+}
+.trending-container .trending-preview:hover::-webkit-scrollbar-thumb {
+    background: var(--blue-water);
+    border-radius: 10px;
+}
+.trending-container .trending-preview::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
 .trending-container .trending-preview img {
     width: 190px;
     height: 290px;
@@ -215,6 +231,22 @@ body {
     gap: 10px;
     padding-top: 10px;
     overflow-x: scroll;
+}
+.trailer-container .trailer-preview::-webkit-scrollbar {
+    height: 0px;
+}
+.trailer-container .trailer-preview:hover::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border: .1px solid var(--blue-dark);
+}
+.trailer-container .trailer-preview::-webkit-scrollbar-thumb {
+    background: var(--blue-water);
+    border-radius: 5px;
+}
+.trailer-container .trailer-preview::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .trailer-container .trailer-preview img {
     width: 130px;
