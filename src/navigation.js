@@ -45,6 +45,7 @@ function navigator() {
 function trendsPage() {
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
+    headerTittle.classList.remove('inactive'); 
     searchContainer.classList.add('inactive');
     trendingContainer.classList.add('inactive');
     trailerContainer.classList.add('inactive');
@@ -53,7 +54,7 @@ function trendsPage() {
     leftMenuContainer.classList.add('inactive')
     genericContainer.classList.remove('inactive');
 
-    headerTittle.innerText = 'Trends';
+    headerTittle.innerText = 'Popular Movies';
     getTrendingMovies();
 }
 function searchPage() {
