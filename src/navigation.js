@@ -11,7 +11,6 @@ window.addEventListener('load', navigator, false)
 window.addEventListener('hashchange', navigator, false)
 
 function navigator() {
-    console.log(location);
     navChkHamburgerMenu.checked = false;
     getCategoriesPreview();
     if (location.hash.startsWith('#trends')){
@@ -38,8 +37,6 @@ function navigator() {
 }
 
 function trendsPage() {
-    console.log('TRENDS!!!');
-
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
     searchContainer.classList.add('inactive');
@@ -54,8 +51,6 @@ function trendsPage() {
     getTrendingMovies();
 }
 function searchPage() {
-    console.log('SEARCH!!!');
-
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
     headerTittle.classList.add('inactive');
@@ -72,8 +67,6 @@ function searchPage() {
     searchMovies(decodeURI(query));
 }
 function movieDetailPage() {
-    console.log('MOVIE DETAIL!!!');
-
     navbar.classList.add('inactive');
     headerContainer.classList.add('inactive');
     searchContainer.classList.add('inactive');
@@ -88,8 +81,6 @@ function movieDetailPage() {
     getMovieById(id);
 }
 function categoryPage() {
-    console.log('CATEGORY!!!');
-
     navbar.classList.remove('inactive');
     headerContainer.classList.remove('inactive');
     headerTittle.classList.remove('inactive');  
@@ -108,8 +99,6 @@ function categoryPage() {
     getMoviesByCategory(categoryId);
 }
 function homePage() {
-    console.log('HOME!!!');
-
     navbar.classList.remove('inactive');
     headerContainer.classList.add('inactive');
     searchContainer.classList.remove('inactive');
