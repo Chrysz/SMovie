@@ -196,6 +196,7 @@ body {
 .trending-container .trending-preview img {
     width: 190px;
     height: 290px;
+    cursor: pointer;
 }
 /*#endregion trending container*/
 /*#region trailer container*/
@@ -218,12 +219,16 @@ body {
 .trailer-container .trailer-preview img {
     width: 130px;
     height: 200px;
+    cursor: pointer;
 }
 /*#endregion trailer container*/
 /*#region movie detail*/
 .detailBackground {
-    background-image: url(https://i0.wp.com/www.montelent.com/wp-content/uploads/2020/07/southpaw-2015.jpg);
+    /* background-image: url(https://i0.wp.com/www.montelent.com/wp-content/uploads/2020/07/southpaw-2015.jpg); */
     background-size: cover !important;
+    background: linear-gradient(180deg, 
+                    rgba(0,0,0,0.35) 19.27%,
+                    rgba(0,0,0,0) 29.17%); 
     height: 100%;
     position: fixed;
     top: 0;
@@ -234,13 +239,14 @@ body {
     border-style: none;
     font-size: 40px;
     padding: 10px 0 0 10px;
+    cursor: pointer;
 }
 .movieDetail-container {
     background-color: var(--blue-dark);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     padding: 32px 24px;
-    margin-top: 403px;
+    margin-top: 650px;
     width: 100%;
     z-index: 1;
     position: absolute;
@@ -256,6 +262,9 @@ body {
     text-align: right;
     width: 18%;
     font-weight: var(--font-weight-bold);
+}
+.movieDetail-container .movieDetail-category-container {
+    margin: 0 0 16px 0;
 }
 .movieDetail-container .movieDetail-score::before {
     content: '★';
@@ -332,6 +341,7 @@ body {
 .generic-container .generic-preview img {
     width: 190px;
     height: 290px;
+    cursor: pointer;
 }
 /*#endregion generic-container*/
 

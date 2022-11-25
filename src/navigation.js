@@ -4,9 +4,8 @@ searchButton.addEventListener('click', () => {
     location.hash = `#search=${searchInput.value}`;
 });
 trendingButton.addEventListener('click', () => location.hash = '#trends');
-headerArrowButton.addEventListener('click', () => {
-    history.back();
-});
+headerArrowButton.addEventListener('click', () => history.back());
+detailBackArrow.addEventListener('click', () => history.back());
 
 window.addEventListener('load', navigator, false)
 window.addEventListener('hashchange', navigator, false)
@@ -84,6 +83,9 @@ function movieDetailPage() {
     movieDetailContainer.classList.remove('inactive');
     leftMenuContainer.classList.add('inactive')
     genericContainer.classList.add('inactive');
+
+    const [_, id] = location.hash.split('=');
+    getMovieById(id);
 }
 function categoryPage() {
     console.log('CATEGORY!!!');

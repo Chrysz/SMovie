@@ -1,4 +1,5 @@
-const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const IMG_BASE_URL_300 = 'https://image.tmdb.org/t/p/w300';
+const IMG_BASE_URL_500 = 'https://image.tmdb.org/t/p/w500';
 
 const axiosApi = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
@@ -15,7 +16,8 @@ function createMovies(movies, container)
         const previewImg = document.createElement('img');
         previewImg.classList.add('movie-img');
         previewImg.setAttribute('alt', movie.name);
-        previewImg.setAttribute('src', `${IMG_BASE_URL}/${movie.poster_path}`);
+        previewImg.setAttribute('src', `${IMG_BASE_URL_300}/${movie.poster_path}`);
+        previewImg.addEventListener('click', () => location.hash=`movie=${movie.id}` );
 
         container.appendChild(previewImg);
     });
@@ -84,4 +86,40 @@ async function searchMovies(query) {
     });
     const movies = data.results;
     createMovies(movies, genericPreview);
+}
+
+async function getMovieById(id) {
+    clearMovieDetail();
+    
+    // se renombra data a movie
+    const { data: movie } = await axiosApi(`/movie/${id}`);
+    console.log(movie);
+
+    detailBackground.style.background = `
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.35) 19.27%,
+            rgba(0,0,0,0) 29.17%
+        ),
+        url(${IMG_BASE_URL_500}/${movie.poster_path})
+    `
+    movieDetailTitle.innerHTML = movie.title;
+    movieDetailScore.innerHTML = movie.vote_average;
+    movieDetailDescription.innerHTML = movie.overview;
+    movieDetailCategory.innerHTML = movie.genres.map((gen) => gen.name).join(',');
+}
+
+function clearMovieDetail() {
+    movieDetailTitle.innerHTML = '';
+    movieDetailScore.innerHTML = '';{}
+    movieDetailDescription.innerHTML = '';
+    movieDetailDescription.innerHTML = '';
+    movieDetailSimilar.innerHTML = '';
+    detailBackground.style.background = `
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.35) 19.27%,
+            rgba(0,0,0,0) 29.17%
+        )
+    `
 }

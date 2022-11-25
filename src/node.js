@@ -29,10 +29,16 @@ const trailerPreview = document.querySelector('.trailer-container .trailer-previ
 
 //#region Detail Background
 const detailBackground = document.querySelector('.detailBackground');
+const detailBackArrow = document.querySelector('.detailBackground .detail-arrow');
 //#endregion Detail Background
 
 //#region Movie Detail Container
 const movieDetailContainer = document.querySelector('.movieDetail-container');
+const movieDetailTitle = document.querySelector('.movieDetail-container .movieDetail-title');
+const movieDetailScore = document.querySelector('.movieDetail-container .movieDetail-score');
+const movieDetailCategory = document.querySelector('.movieDetail-container .movieDetail-category-container .category-detail');
+const movieDetailDescription = document.querySelector('.movieDetail-container .movieDetail-description');
+const movieDetailSimilar = document.querySelector('.movieDetail-container .movieDetail-similar');
 //#endregion Movie Detail Container
 
 //#region Left Menu Container
