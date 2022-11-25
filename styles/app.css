@@ -331,6 +331,7 @@ body {
 .movieDetail-container .movieDetail-similar img {
     width: 120px;
     height: 190px;
+    cursor: pointer;
 }
 /*#endregion movie detail*/
 /*#region left-menu*/
