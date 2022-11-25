@@ -1,5 +1,11 @@
 // Button event
 navTitle.addEventListener('click', () => location.hash = '#home')
+searchInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') {
+        location.hash = `#search=${searchInput.value}`;
+        e.preventDefault();
+    }
+});
 searchButton.addEventListener('click', () => {
     location.hash = `#search=${searchInput.value}`;
 });
@@ -99,6 +105,7 @@ function categoryPage() {
     getMoviesByCategory(categoryId);
 }
 function homePage() {
+    searchInput.value = '';
     navbar.classList.remove('inactive');
     headerContainer.classList.add('inactive');
     searchContainer.classList.remove('inactive');
