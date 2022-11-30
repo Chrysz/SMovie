@@ -210,9 +210,13 @@ body {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .trending-container .trending-preview img {
-    width: 190px;
-    height: 290px;
     cursor: pointer;
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
 }
 .trending-container .trending-preview .skeleton--loading {
     width: 190px;
@@ -265,9 +269,13 @@ body {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .trailer-container .trailer-preview img {
-    width: 130px;
-    height: 200px;
     cursor: pointer;
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
 }
 .trailer-container .trailer-preview .skeleton--loading {
     background-color: var(--blue);

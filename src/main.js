@@ -9,16 +9,30 @@ const axiosApi = axios.create({
 });
 
 // Utils
-function createMovies(movies, container)
+
+// const lazyLoader = new IntersectionObserver(callback, options)
+// si se omite opciones, observa todo el body
+const lazyLoader = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            const url = entry.target.getAttribute('data-img');
+            entry.target.setAttribute('src', url);
+        }
+    });
+});
+function createMovies(movies, container, lazyLoad = false)
 {
     container.innerHTML = '';
     movies.forEach(movie => {
         const previewImg = document.createElement('img');
         previewImg.classList.add('movie-img');
-        previewImg.setAttribute('alt', movie.name);
-        previewImg.setAttribute('src', `${IMG_BASE_URL_300}/${movie.poster_path}`);
+        previewImg.setAttribute('alt', movie.title);
+        previewImg.setAttribute(lazyLoad ? 'data-img' : 'src', `${IMG_BASE_URL_300}/${movie.poster_path}`);
         previewImg.addEventListener('click', () => location.hash=`movie=${movie.id}` );
 
+        if(lazyLoad) 
+            lazyLoader.observe(previewImg);
+        
         container.appendChild(previewImg);
     });
 }
@@ -34,7 +48,6 @@ function createCategories(categories, container){
     });
 }
 
-
 // Llamados API
 navChkHamburgerMenu.addEventListener('click', event => {
     leftMenuContainer.classList.toggle('inactive');
@@ -43,7 +56,7 @@ navChkHamburgerMenu.addEventListener('click', event => {
 async function getTrendingMoviesPreview() {
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
-    createMovies(movies, trendingPreview);
+    createMovies(movies, trendingPreview, true);
 }
 
 async function getTrendingMovies() {
@@ -63,7 +76,7 @@ async function getPopularMovies() {
     try {
         const { data } = await axiosApi('/movie/popular');
         const movies = data.results;
-        createMovies(movies, trailerPreview);
+        createMovies(movies, trailerPreview, true);
     } catch (error) {
         console.error(error)
     }
