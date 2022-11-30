@@ -214,6 +214,22 @@ body {
     height: 290px;
     cursor: pointer;
 }
+.trending-container .trending-preview .skeleton--loading {
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
+    background-color: var(--blue);
+    animation: loading-skeleton infinite 1.5s;
+}
+.trending-container .trending-preview .skeleton--loading:nth-child(2) {
+    animation-delay: .2s;
+}
+.trending-container .trending-preview .skeleton--loading:nth-child(3) {
+    animation-delay: .4s;
+}
 /*#endregion trending container*/
 /*#region trailer container*/
 .trailer-container {
@@ -252,6 +268,25 @@ body {
     width: 130px;
     height: 200px;
     cursor: pointer;
+}
+.trailer-container .trailer-preview .skeleton--loading {
+    background-color: var(--blue);
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
 }
 /*#endregion trailer container*/
 /*#region movie detail*/
@@ -333,6 +368,26 @@ body {
     height: 190px;
     cursor: pointer;
 }
+.movieDetail-container .movieDetail-similar .skeleton--loading {
+    background: var(--blue);
+    cursor: pointer;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 190px;
+    min-height: 190px;
+    max-height: 190px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
+}
 /*#endregion movie detail*/
 /*#region left-menu*/
 .left-menu-container {
@@ -392,9 +447,45 @@ body {
     height: 290px;
     cursor: pointer;
 }
+.generic-container .generic-preview .skeleton--loading {
+    cursor: pointer;
+    background-color: var(--blue);
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(2) {
+    animation-delay: .2s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(3) {
+    animation-delay: .4s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(4) {
+    animation-delay: .6s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(5) {
+    animation-delay: .8s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(6) {
+    animation-delay: 1s;
+}
 /*#endregion generic-container*/
 
 
 .inactive {
     display: none !important;
+}
+
+/* Animations */
+@keyframes loading-skeleton {
+    0%, 100% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
+    }
 }

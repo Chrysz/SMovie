@@ -47,6 +47,7 @@ async function getTrendingMoviesPreview() {
 }
 
 async function getTrendingMovies() {
+    imgSkelLoading(genericPreview);
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
     createMovies(movies, genericPreview)
@@ -69,6 +70,7 @@ async function getPopularMovies() {
 }
 
 async function getMoviesByCategory(categoryId) {
+    imgSkelLoading(genericPreview);
     const { data } = await axiosApi('discover/movie', {
         params: {
             'with_genres': categoryId
@@ -79,6 +81,7 @@ async function getMoviesByCategory(categoryId) {
 }
 
 async function searchMovies(query) {
+    imgSkelLoading(genericPreview);
     const { data } = await axiosApi('/search/movie', {
         params: {
             'query': query
@@ -93,7 +96,6 @@ async function getMovieById(id) {
     
     // se renombra data a movie
     const { data: movie } = await axiosApi(`/movie/${id}`);
-
     detailBackground.style.background = `
         linear-gradient(
             180deg,
@@ -103,7 +105,7 @@ async function getMovieById(id) {
         url(${IMG_BASE_URL_500}/${movie.poster_path})
     `
     movieDetailTitle.innerHTML = movie.title;
-    movieDetailScore.innerHTML = movie.vote_average;
+    movieDetailScore.innerHTML = movie.vote_average.toFixed(1);
     movieDetailDescription.innerHTML = movie.overview;
     movieDetailCategory.innerHTML = movie.genres.map((gen) => gen.name).join(',');
     getRelatedMovieById(movie.id);
@@ -125,8 +127,20 @@ function clearMovieDetail() {
 }
 
 async function getRelatedMovieById(id){
+    imgSkelLoading(movieDetailSimilar);
     const { data } = await axiosApi(`/movie/${id}/recommendations`);
     const relatedMovies = data.results;
 
     createMovies(relatedMovies, movieDetailSimilar);
+}
+
+// Shared Skeleton Img Loading
+function imgSkelLoading(container){
+    const qty = 4;
+    container.innerHTML = '';
+    for(var i = 0; i < qty; i++) {
+        const skelLoading = document.createElement('div');
+        skelLoading.classList.add('skeleton--loading');
+        container.appendChild(skelLoading);
+    }
 }
