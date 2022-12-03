@@ -373,7 +373,11 @@ body {
 }
 .movieDetail-container .movieDetail-similar img {
     width: 120px;
+    min-width: 120px;
+    max-width: 120px;
     height: 190px;
+    min-height: 190px;
+    max-height: 190px;
     cursor: pointer;
 }
 .movieDetail-container .movieDetail-similar .skeleton--loading {

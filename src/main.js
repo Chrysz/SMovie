@@ -28,6 +28,9 @@ function createMovies(movies, container, lazyLoad = false)
         previewImg.classList.add('movie-img');
         previewImg.setAttribute('alt', movie.title);
         previewImg.setAttribute(lazyLoad ? 'data-img' : 'src', `${IMG_BASE_URL_300}/${movie.poster_path}`);
+        previewImg.addEventListener('error', () => {
+            previewImg.setAttribute('src', 'assets/FilmNotFound.jpg');
+        });
         previewImg.addEventListener('click', () => location.hash=`movie=${movie.id}` );
 
         if(lazyLoad) 
@@ -63,7 +66,7 @@ async function getTrendingMovies() {
     imgSkelLoading(genericPreview);
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
-    createMovies(movies, genericPreview)
+    createMovies(movies, genericPreview, true)
 }
 
 async function getCategoriesPreview() {
@@ -90,7 +93,7 @@ async function getMoviesByCategory(categoryId) {
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview);
+    createMovies(movies, genericPreview, true);
 }
 
 async function searchMovies(query) {
@@ -101,7 +104,7 @@ async function searchMovies(query) {
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview);
+    createMovies(movies, genericPreview, true);
 }
 
 async function getMovieById(id) {
@@ -144,7 +147,7 @@ async function getRelatedMovieById(id){
     const { data } = await axiosApi(`/movie/${id}/recommendations`);
     const relatedMovies = data.results;
 
-    createMovies(relatedMovies, movieDetailSimilar);
+    createMovies(relatedMovies, movieDetailSimilar, true);
 }
 
 // Shared Skeleton Img Loading
