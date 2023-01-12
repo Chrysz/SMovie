@@ -20,9 +20,11 @@ const lazyLoader = new IntersectionObserver((entries) => {
         }
     });
 });
-function createMovies(movies, container, lazyLoad = false)
+function createMovies(movies, container, { lazyLoad = false, cleanContainer = true, } = {})
 {
-    container.innerHTML = '';
+    if (cleanContainer)
+        container.innerHTML = '';
+
     movies.forEach(movie => {
         const previewImg = document.createElement('img');
         previewImg.classList.add('movie-img');
@@ -59,14 +61,36 @@ navChkHamburgerMenu.addEventListener('click', event => {
 async function getTrendingMoviesPreview() {
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
-    createMovies(movies, trendingPreview, true);
+    createMovies(movies, trendingPreview, { lazyLoad: true });
 }
 
 async function getTrendingMovies() {
     imgSkelLoading(genericPreview);
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
-    createMovies(movies, genericPreview, true)
+    createMovies(movies, genericPreview, { lazyLoad: true })
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Load More...';
+    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+    genericPreview.appendChild(btnLoadMore);
+}
+
+let page = 1;
+async function getPaginatedTrendingMovies(){
+    page++;
+    const { data } = await axiosApi('trending/movie/day', {
+        params:{
+            page,
+        }
+    });
+    const movies = data.results;
+    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: false })
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Load More...';
+    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
+    genericPreview.appendChild(btnLoadMore);
 }
 
 async function getCategoriesPreview() {
@@ -79,7 +103,7 @@ async function getPopularMovies() {
     try {
         const { data } = await axiosApi('/movie/popular');
         const movies = data.results;
-        createMovies(movies, trailerPreview, true);
+        createMovies(movies, trailerPreview, { lazyLoad: true });
     } catch (error) {
         console.error(error)
     }
@@ -93,7 +117,7 @@ async function getMoviesByCategory(categoryId) {
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview, true);
+    createMovies(movies, genericPreview, { lazyLoad: true });
 }
 
 async function searchMovies(query) {
@@ -104,7 +128,7 @@ async function searchMovies(query) {
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview, true);
+    createMovies(movies, genericPreview, { lazyLoad: true });
 }
 
 async function getMovieById(id) {
@@ -129,7 +153,7 @@ async function getMovieById(id) {
 
 function clearMovieDetail() {
     movieDetailTitle.innerHTML = '';
-    movieDetailScore.innerHTML = '';{}
+    movieDetailScore.innerHTML = '';
     movieDetailDescription.innerHTML = '';
     movieDetailDescription.innerHTML = '';
     movieDetailSimilar.innerHTML = '';
@@ -147,7 +171,7 @@ async function getRelatedMovieById(id){
     const { data } = await axiosApi(`/movie/${id}/recommendations`);
     const relatedMovies = data.results;
 
-    createMovies(relatedMovies, movieDetailSimilar, true);
+    createMovies(relatedMovies, movieDetailSimilar, { lazyLoad: true });
 }
 
 // Shared Skeleton Img Loading
