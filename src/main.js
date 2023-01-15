@@ -98,42 +98,46 @@ async function getPopularMovies() {
     }
 }
 
-async function getMoviesByCategory(categoryId) {
-    let firstPage = isFirstPage();
-    if(firstPage)
-        imgSkelLoading(genericPreview);
-    
-    const { data } = await axiosApi('discover/movie', {
-        params: {
-            'with_genres': categoryId,
-            page,
-        }
-    });
+function getMoviesByCategory(categoryId) {
+    return async function () {
+        let firstPage = isFirstPage();
+        if(firstPage)
+            imgSkelLoading(genericPreview);
+        
+        const { data } = await axiosApi('discover/movie', {
+            params: {
+                'with_genres': categoryId,
+                page,
+            }
+        });
 
-    if(firstPage)
-        maxPages = data.total_pages;
+        if(firstPage)
+            maxPages = data.total_pages;
 
-    const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+        const movies = data.results;
+        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+    }    
 }
 
-async function searchMovies(query) {
-    let firstPage = isFirstPage()
-    if(firstPage)
-        imgSkelLoading(genericPreview);
-    
-    const { data } = await axiosApi('/search/movie', {
-        params: {
-            'query': query,
-            page,
-        }
-    });
+function searchMovies(query) {
+    return async function () {
+        let firstPage = isFirstPage()
+        if(firstPage)
+            imgSkelLoading(genericPreview);
+        
+        const { data } = await axiosApi('/search/movie', {
+            params: {
+                'query': query,
+                page,
+            }
+        });
 
-    if(firstPage)
-        maxPages = data.total_pages;
+        if(firstPage)
+            maxPages = data.total_pages;
 
-    const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+        const movies = data.results;
+        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+    }    
 }
 
 async function getMovieById(id) {

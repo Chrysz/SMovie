@@ -73,7 +73,7 @@ function trendsPage() {
 
     headerTittle.innerText = 'Popular Movies';
     getTrendingMovies();
-    infiniteScroll = () => GenericInfiniteScroll(getTrendingMovies);
+    infiniteScroll = GenericInfiniteScroll(getTrendingMovies);
 }
 function searchPage() {
     navbar.classList.remove('inactive');
@@ -89,8 +89,8 @@ function searchPage() {
 
     //['#search', 'query']
     const [ _ , query ] = location.hash.split('=');
-    searchMovies(decodeURI(query));
-    infiniteScroll = () => GenericInfiniteScroll(() => searchMovies(decodeURI(query)));
+    searchMovies(decodeURI(query))();
+    infiniteScroll = GenericInfiniteScroll(searchMovies(decodeURI(query)));
 }
 function movieDetailPage() {
     navbar.classList.add('inactive');
@@ -122,8 +122,8 @@ function categoryPage() {
     const [ _ , categoryInfo ] = location.hash.split('=');
     const [ categoryId, categoryName ] = categoryInfo.split('-')
     headerTittle.innerText = decodeURI(categoryName);
-    getMoviesByCategory(categoryId);
-    infiniteScroll = () => GenericInfiniteScroll(() => getMoviesByCategory(categoryId))
+    getMoviesByCategory(categoryId)();
+    infiniteScroll = GenericInfiniteScroll(getMoviesByCategory(categoryId))
 }
 function homePage() {
     searchInput.value = '';
@@ -144,12 +144,14 @@ function homePage() {
 
 // Generic Infinite Scroll
 function GenericInfiniteScroll(callback){
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
-    let isNotMaxPage = page < maxPages;
-    if (scrollIsBottom && isNotMaxPage)
-    {
-        page++;
-        callback();
+    return async function () {
+        const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+        let isNotMaxPage = page < maxPages;
+        if (scrollIsBottom && isNotMaxPage)
+        {
+            page++;
+            callback();
+        }
     }
 }
