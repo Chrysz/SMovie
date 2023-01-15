@@ -1,3 +1,7 @@
+// Variables
+let page = 1;
+let infiniteScroll;
+
 // Button event
 navTitle.addEventListener('click', () => location.hash = '#home')
 searchInput.addEventListener('keypress', (e) => {
@@ -15,8 +19,15 @@ detailBackArrow.addEventListener('click', () => history.back());
 
 window.addEventListener('load', navigator, false)
 window.addEventListener('hashchange', navigator, false)
+window.addEventListener('scroll', infiniteScroll, false);
 
 function navigator() {
+    if(infiniteScroll) {
+        window.removeEventListener('scroll', infiniteScroll, { passive: false });
+        infiniteScroll = undefined;
+        page = 1;
+    }
+
     navChkHamburgerMenu.checked = false;
     getCategoriesPreview();
     if (location.hash.startsWith('#trends')){
@@ -40,6 +51,10 @@ function navigator() {
 
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+
+    if(infiniteScroll) {
+        window.addEventListener('scroll', infiniteScroll, false);
+    }
 }
 
 function trendsPage() {
@@ -56,6 +71,7 @@ function trendsPage() {
 
     headerTittle.innerText = 'Popular Movies';
     getTrendingMovies();
+    infiniteScroll = () => GenericInfiniteScroll(getTrendingMovies);
 }
 function searchPage() {
     navbar.classList.remove('inactive');
@@ -72,6 +88,7 @@ function searchPage() {
     //['#search', 'query']
     const [ _ , query ] = location.hash.split('=');
     searchMovies(decodeURI(query));
+    infiniteScroll = () => GenericInfiniteScroll(() => searchMovies(decodeURI(query)));
 }
 function movieDetailPage() {
     navbar.classList.add('inactive');
@@ -104,6 +121,7 @@ function categoryPage() {
     const [ categoryId, categoryName ] = categoryInfo.split('-')
     headerTittle.innerText = decodeURI(categoryName);
     getMoviesByCategory(categoryId);
+    infiniteScroll = () => GenericInfiniteScroll(() => getMoviesByCategory(categoryId))
 }
 function homePage() {
     searchInput.value = '';
@@ -120,4 +138,15 @@ function homePage() {
 
     getTrendingMoviesPreview();
     getPopularMovies();
+}
+
+// Generic Infinite Scroll
+function GenericInfiniteScroll(callback){
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+    if (scrollIsBottom)
+    {
+        page++;
+        callback();
+    }
 }

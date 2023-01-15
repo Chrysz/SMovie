@@ -65,32 +65,17 @@ async function getTrendingMoviesPreview() {
 }
 
 async function getTrendingMovies() {
-    imgSkelLoading(genericPreview);
-    const { data } = await axiosApi('trending/movie/day');
-    const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true })
+    let firstPage = isFirstPage();
+    if(firstPage)
+        imgSkelLoading(genericPreview);
 
-    const btnLoadMore = document.createElement('button');
-    btnLoadMore.innerText = 'Load More...';
-    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-    genericPreview.appendChild(btnLoadMore);
-}
-
-let page = 1;
-async function getPaginatedTrendingMovies(){
-    page++;
     const { data } = await axiosApi('trending/movie/day', {
-        params:{
+        params: {
             page,
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: false })
-
-    const btnLoadMore = document.createElement('button');
-    btnLoadMore.innerText = 'Load More...';
-    btnLoadMore.addEventListener('click', getPaginatedTrendingMovies);
-    genericPreview.appendChild(btnLoadMore);
+    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage })
 }
 
 async function getCategoriesPreview() {
@@ -110,25 +95,33 @@ async function getPopularMovies() {
 }
 
 async function getMoviesByCategory(categoryId) {
-    imgSkelLoading(genericPreview);
+    let firstPage = isFirstPage();
+    if(firstPage)
+        imgSkelLoading(genericPreview);
+    
     const { data } = await axiosApi('discover/movie', {
         params: {
-            'with_genres': categoryId
+            'with_genres': categoryId,
+            page,
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true });
+    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
 }
 
 async function searchMovies(query) {
-    imgSkelLoading(genericPreview);
+    let firstPage = isFirstPage()
+    if(firstPage)
+        imgSkelLoading(genericPreview);
+    
     const { data } = await axiosApi('/search/movie', {
         params: {
-            'query': query
+            'query': query,
+            page,
         }
     });
     const movies = data.results;
-    createMovies(movies, genericPreview, { lazyLoad: true });
+    createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
 }
 
 async function getMovieById(id) {
@@ -183,4 +176,8 @@ function imgSkelLoading(container){
         skelLoading.classList.add('skeleton--loading');
         container.appendChild(skelLoading);
     }
+}
+
+function isFirstPage(){
+    return page === 1;
 }
