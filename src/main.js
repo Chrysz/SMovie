@@ -74,6 +74,10 @@ async function getTrendingMovies() {
             page,
         }
     });
+
+    if(firstPage)
+        maxPages = data.total_pages;
+
     const movies = data.results;
     createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage })
 }
@@ -105,6 +109,10 @@ async function getMoviesByCategory(categoryId) {
             page,
         }
     });
+
+    if(firstPage)
+        maxPages = data.total_pages;
+
     const movies = data.results;
     createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
 }
@@ -120,6 +128,10 @@ async function searchMovies(query) {
             page,
         }
     });
+
+    if(firstPage)
+        maxPages = data.total_pages;
+
     const movies = data.results;
     createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
 }

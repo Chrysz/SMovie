@@ -1,4 +1,5 @@
 // Variables
+let maxPages;
 let page = 1;
 let infiniteScroll;
 
@@ -26,6 +27,7 @@ function navigator() {
         window.removeEventListener('scroll', infiniteScroll, { passive: false });
         infiniteScroll = undefined;
         page = 1;
+        maxPages = undefined;
     }
 
     navChkHamburgerMenu.checked = false;
@@ -144,7 +146,8 @@ function homePage() {
 function GenericInfiniteScroll(callback){
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
     const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
-    if (scrollIsBottom)
+    let isNotMaxPage = page < maxPages;
+    if (scrollIsBottom && isNotMaxPage)
     {
         page++;
         callback();
