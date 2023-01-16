@@ -50,3 +50,8 @@ const leftMenuCategories = document.querySelector('.left-menu-container .left-me
 const genericContainer = document.querySelector('.generic-container');
 const genericPreview = document.querySelector('.generic-container .generic-preview');
 //#endregion Generic Container
+
+//#region Liked Container
+const likedContainer = document.querySelector('.liked-container');
+const likedPreview = document.querySelector('.liked-container .liked-preview');
+//#endregion Liked Container
