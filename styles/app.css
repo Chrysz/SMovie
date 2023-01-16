@@ -485,7 +485,93 @@ body {
     animation-delay: 1s;
 }
 /*#endregion generic-container*/
+/*#region liked container*/
+.liked-container {
+    padding: 10px;
+    padding-bottom: 25px;
+}
+.liked-container .liked-title {
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray)
+}
+.liked-container .liked-preview {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 10px;
+    overflow-x: scroll;
+}
+.liked-container .liked-preview::-webkit-scrollbar {
+    height: 0px;
+}
+.liked-container .liked-preview:hover::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border: .1px solid var(--blue-dark);
+}
+.liked-container .liked-preview::-webkit-scrollbar-thumb {
+    background: var(--blue-water);
+    border-radius: 5px;
+}
+.liked-container .liked-preview::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.liked-container .liked-preview img {
+    cursor: pointer;
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+}
+.liked-container .liked-preview .skeleton--loading {
+    background-color: var(--blue);
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
+}
+/*#endregion liked container*/
 
+.movie-container {
+    position: relative;
+}
+.movie-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-color: var(--white);
+    margin: 0;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 1, 0.5);
+}
+.movie-btn::before {
+    content: '🤍';
+}
+.movie-btn--liked {
+    border-color: red;
+}
+.movie-btn--liked::before {
+    content: '❤️';
+}
 
 .inactive {
     display: none !important;

@@ -26,6 +26,9 @@ function createMovies(movies, container, { lazyLoad = false, cleanContainer = tr
         container.innerHTML = '';
 
     movies.forEach(movie => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('movie-container');
+
         const previewImg = document.createElement('img');
         previewImg.classList.add('movie-img');
         previewImg.setAttribute('alt', movie.title);
@@ -35,10 +38,19 @@ function createMovies(movies, container, { lazyLoad = false, cleanContainer = tr
         });
         previewImg.addEventListener('click', () => location.hash=`movie=${movie.id}` );
 
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+        movieBtn.addEventListener('click', () => {
+            movieBtn.classList.toggle('movie-btn--liked');
+            // Se debe agregar la pelicula a local storage
+        });
+
         if(lazyLoad) 
             lazyLoader.observe(previewImg);
         
-        container.appendChild(previewImg);
+        imgContainer.appendChild(previewImg);
+        imgContainer.appendChild(movieBtn);
+        container.appendChild(imgContainer);
     });
 }
 function createCategories(categories, container){
