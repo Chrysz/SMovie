@@ -141,7 +141,10 @@ function homePage() {
     movieDetailContainer.style.background = '';
     leftMenuContainer.classList.add('inactive');
     genericContainer.classList.add('inactive');
-    likedContainer.classList.remove('inactive');
+    
+    const obj = likedMoviesList();
+    if(Object.keys(obj).length !== 0)
+        likedContainer.classList.remove('inactive');
 
     getTrendingMoviesPreview();
     getPopularMovies();

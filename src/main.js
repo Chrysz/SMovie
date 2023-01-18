@@ -28,6 +28,12 @@ function likeMovie(movie) {
         getTrendingMoviesPreview();
         getPopularMovies();
         getLikedMovies();
+
+        const obj = likedMoviesList();
+        if(Object.keys(obj).length === 0)
+            likedContainer.classList.add('inactive');
+        else
+        likedContainer.classList.remove('inactive');
     }
 }
 
