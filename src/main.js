@@ -23,6 +23,12 @@ function likeMovie(movie) {
         likedMovies[movie.id] = movie;
 
     localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+
+    if (location.hash == ''){
+        getTrendingMoviesPreview();
+        getPopularMovies();
+        getLikedMovies();
+    }
 }
 
 // Utils
@@ -57,6 +63,7 @@ function createMovies(movies, container, { lazyLoad = false, cleanContainer = tr
 
         const movieBtn = document.createElement('button');
         movieBtn.classList.add('movie-btn');
+        likedMoviesList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
         movieBtn.addEventListener('click', () => {
             movieBtn.classList.toggle('movie-btn--liked'); 
             likeMovie(movie);
@@ -210,6 +217,13 @@ async function getRelatedMovieById(id){
     const relatedMovies = data.results;
 
     createMovies(relatedMovies, movieDetailSimilar, { lazyLoad: true });
+}
+
+function getLikedMovies() {
+    const likedMovies = likedMoviesList();
+    const moviesArray = Object.values(likedMovies);
+
+    createMovies(moviesArray, likedPreview, { lazyLoad: true, cleanContainer: true })
 }
 
 // Shared Skeleton Img Loading

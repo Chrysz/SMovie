@@ -145,6 +145,7 @@ function homePage() {
 
     getTrendingMoviesPreview();
     getPopularMovies();
+    getLikedMovies();
 }
 
 // Generic Infinite Scroll
