@@ -8,6 +8,23 @@ const axiosApi = axios.create({
     }
 });
 
+// Devolver el array de peliculas en el LocalStorage
+function likedMoviesList() {
+    const item = JSON.parse(localStorage.getItem('liked_movies'));
+    return item ? item : {};
+}
+
+function likeMovie(movie) {
+    const likedMovies = likedMoviesList();
+
+    if(likedMovies[movie.id])
+        likedMovies[movie.id] = undefined;
+    else
+        likedMovies[movie.id] = movie;
+
+    localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+}
+
 // Utils
 
 // const lazyLoader = new IntersectionObserver(callback, options)
@@ -41,8 +58,8 @@ function createMovies(movies, container, { lazyLoad = false, cleanContainer = tr
         const movieBtn = document.createElement('button');
         movieBtn.classList.add('movie-btn');
         movieBtn.addEventListener('click', () => {
-            movieBtn.classList.toggle('movie-btn--liked');
-            // Se debe agregar la pelicula a local storage
+            movieBtn.classList.toggle('movie-btn--liked'); 
+            likeMovie(movie);
         });
 
         if(lazyLoad) 
