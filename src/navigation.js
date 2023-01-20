@@ -18,8 +18,38 @@ trendingButton.addEventListener('click', () => location.hash = '#trends');
 headerArrowButton.addEventListener('click', () => history.back());
 detailBackArrow.addEventListener('click', () => history.back());
 
-window.addEventListener('load', navigator, false)
-window.addEventListener('hashchange', navigator, false)
+// Language Caption
+const enCaptions = {
+    searchInputLabel: 'Search movie',
+    popularMoviesTitle: 'Popular Movies',
+    viewMoreBtnLabel: 'View More',
+    newTrailersTitle: 'New Trailers',
+    favoritesTitle: 'Favorites',
+    categoryTitle: 'Categories',
+}
+const esCaptions = {
+    searchInputLabel: 'Buscar película',
+    popularMoviesTitle: 'Películas Populares',
+    viewMoreBtnLabel: 'Ver Más',
+    newTrailersTitle: 'Sinopsis',
+    favoritesTitle: 'Favoritos',
+    categoryTitle: 'Categorias',
+}
+const frCaptions = {
+    searchInputLabel: 'Rechercher un film',
+    popularMoviesTitle: 'Films Populaires',
+    viewMoreBtnLabel: 'Voir Plus',
+    newTrailersTitle: 'Nouveaux Synopsis',
+    favoritesTitle: 'Favoris',
+    categoryTitle: 'Catégories',
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    setPageLanguage();
+    fillPageLanguageSelector();
+}, false);
+window.addEventListener('load', navigator, false);
+window.addEventListener('hashchange', navigator, false);
 window.addEventListener('scroll', infiniteScroll, false);
 
 function navigator() {
@@ -57,6 +87,8 @@ function navigator() {
     if(infiniteScroll) {
         window.addEventListener('scroll', infiniteScroll, false);
     }
+
+    // Se cargan los idiomas soportados por la página
 }
 
 function trendsPage() {
@@ -72,7 +104,7 @@ function trendsPage() {
     genericContainer.classList.remove('inactive');
     likedContainer.classList.add('inactive');
 
-    headerTittle.innerText = 'Popular Movies';
+    headerTittle.innerText = getPageLanguage(localStorage.getItem('current_language')).captions.popularMoviesTitle;
     getTrendingMovies();
     infiniteScroll = GenericInfiniteScroll(getTrendingMovies);
 }
@@ -163,4 +195,61 @@ function GenericInfiniteScroll(callback){
             callback();
         }
     }
+}
+function setPageLanguage() {
+    const languages = {
+        'en': {
+            name: 'English',
+            flag: '🇺🇸',
+            captions: enCaptions,
+        },
+        'es': {
+            name: 'Spanish',
+            flag: '🇪🇸',
+            captions: esCaptions,
+        },
+        'fr': {
+            name: 'French',
+            flag: '🇫🇷',
+            captions: frCaptions,
+        },
+    }
+
+    localStorage.setItem('page_languages', JSON.stringify(languages));
+}
+function getPageLanguage(languageCode) {
+    const result = JSON.parse(localStorage.getItem('page_languages'));
+    if(languageCode)
+        return result[languageCode];
+    
+    return result;
+}
+function fillPageLanguageSelector() {
+    const select = document.createElement('select');
+    const languages = getPageLanguage();
+    Object.getOwnPropertyNames(languages).map(lang => {
+        const opt = new Option(`${languages[lang].flag} ${languages[lang].name}`, lang);
+        select.add(opt);
+    });
+    select.addEventListener('change', (event) => {
+        fillCaptions(event.target.value);
+        localStorage.setItem('current_language', event.target.value);
+    });
+
+    navLanguageContainer.appendChild(select);
+    select.dispatchEvent(new Event('change'));
+}
+function fillCaptions(languageCode) {
+    const language = getPageLanguage(languageCode);
+    // Search placeholder
+    searchInput.setAttribute('placeHolder', language.captions.searchInputLabel);
+    // Trending
+    trendingTitle.innerText = language.captions.popularMoviesTitle;
+    trendingButton.innerText = language.captions.viewMoreBtnLabel;
+    // Trailers
+    trailerTitle.innerText = language.captions.newTrailersTitle;
+    // Favorites
+    likedTitle.innerText = language.captions.favoritesTitle;
+    // Left Menu
+    leftMenuContainerTitle.innerText = language.captions.categoryTitle;
 }
