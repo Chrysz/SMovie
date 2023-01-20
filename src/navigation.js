@@ -196,6 +196,8 @@ function GenericInfiniteScroll(callback){
         }
     }
 }
+
+// Multilanguage
 function setPageLanguage() {
     const languages = {
         'en': {
