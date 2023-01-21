@@ -49,7 +49,7 @@ const lazyLoader = new IntersectionObserver((entries) => {
         }
     });
 });
-function createMovies(movies, container, { lazyLoad = false, cleanContainer = true, } = {})
+function createMovies(movies, container, { lazyLoad = false, cleanContainer = true, updateFav = false } = {})
 {
     if (cleanContainer)
         container.innerHTML = '';
@@ -70,6 +70,17 @@ function createMovies(movies, container, { lazyLoad = false, cleanContainer = tr
         const movieBtn = document.createElement('button');
         movieBtn.classList.add('movie-btn');
         likedMoviesList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
+        
+        if(likedMoviesList()[movie.id] && updateFav) {
+            const likedMovies = likedMoviesList();
+
+            if(likedMovies[movie.id])
+                likedMovies[movie.id] = movie;
+        
+            localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+            getLikedMovies();
+        }
+
         movieBtn.addEventListener('click', () => {
             movieBtn.classList.toggle('movie-btn--liked'); 
             likeMovie(movie);
@@ -103,7 +114,7 @@ navChkHamburgerMenu.addEventListener('click', event => {
 async function getTrendingMoviesPreview() {
     const { data } = await axiosApi('trending/movie/day');
     const movies = data.results;
-    createMovies(movies, trendingPreview, { lazyLoad: true });
+    createMovies(movies, trendingPreview, { lazyLoad: true, updateFav: true });
 }
 
 async function getTrendingMovies() {
@@ -125,16 +136,24 @@ async function getTrendingMovies() {
 }
 
 async function getCategoriesPreview() {
-    const { data } = await axiosApi('/genre/movie/list');
+    const { data } = await axiosApi('/genre/movie/list', {
+        params: {
+            language: getCurrentLanguage()
+        }
+    });
     const categories = data.genres;
     createCategories(categories, leftMenuCategories);
 }
 
 async function getPopularMovies() {
     try {
-        const { data } = await axiosApi('/movie/popular');
+        const { data } = await axiosApi('/movie/popular', {
+            params: {
+                language: getCurrentLanguage()
+            }
+        });
         const movies = data.results;
-        createMovies(movies, trailerPreview, { lazyLoad: true });
+        createMovies(movies, trailerPreview, { lazyLoad: true, updateFav: true });
     } catch (error) {
         console.error(error)
     }
@@ -150,6 +169,7 @@ function getMoviesByCategory(categoryId) {
             params: {
                 'with_genres': categoryId,
                 page,
+                language: getCurrentLanguage()
             }
         });
 
@@ -157,7 +177,7 @@ function getMoviesByCategory(categoryId) {
             maxPages = data.total_pages;
 
         const movies = data.results;
-        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage, updateFav: true });
     }    
 }
 
@@ -171,6 +191,7 @@ function searchMovies(query) {
             params: {
                 'query': query,
                 page,
+                language: getCurrentLanguage(),
             }
         });
 
@@ -178,7 +199,7 @@ function searchMovies(query) {
             maxPages = data.total_pages;
 
         const movies = data.results;
-        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage });
+        createMovies(movies, genericPreview, { lazyLoad: true, cleanContainer: firstPage, updateFav: true });
     }    
 }
 
@@ -186,7 +207,11 @@ async function getMovieById(id) {
     clearMovieDetail();
     
     // se renombra data a movie
-    const { data: movie } = await axiosApi(`/movie/${id}`);
+    const { data: movie } = await axiosApi(`/movie/${id}`, {
+        params: {
+            language: getCurrentLanguage()
+        }
+    });
     detailBackground.style.background = `
         linear-gradient(
             180deg,
@@ -219,7 +244,11 @@ function clearMovieDetail() {
 
 async function getRelatedMovieById(id){
     imgSkelLoading(movieDetailSimilar);
-    const { data } = await axiosApi(`/movie/${id}/recommendations`);
+    const { data } = await axiosApi(`/movie/${id}/recommendations`, {
+        params: {
+            language: getCurrentLanguage()
+        }
+    });
     const relatedMovies = data.results;
 
     createMovies(relatedMovies, movieDetailSimilar, { lazyLoad: true });

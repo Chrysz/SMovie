@@ -48,11 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
     setPageLanguage();
     fillPageLanguageSelector();
 }, false);
-window.addEventListener('load', navigator, false);
-window.addEventListener('hashchange', navigator, false);
+window.addEventListener('load', navigate, false);
+window.addEventListener('hashchange', navigate, false);
 window.addEventListener('scroll', infiniteScroll, false);
 
-function navigator() {
+function navigate() {
     if(infiniteScroll) {
         window.removeEventListener('scroll', infiniteScroll, { passive: false });
         infiniteScroll = undefined;
@@ -87,8 +87,6 @@ function navigator() {
     if(infiniteScroll) {
         window.addEventListener('scroll', infiniteScroll, false);
     }
-
-    // Se cargan los idiomas soportados por la página
 }
 
 function trendsPage() {
@@ -227,15 +225,18 @@ function getPageLanguage(languageCode) {
     return result;
 }
 function fillPageLanguageSelector() {
+    const browserLanguage = window.navigator.language?.split('-')[0] ?? 'en';
+
     const select = document.createElement('select');
     const languages = getPageLanguage();
     Object.getOwnPropertyNames(languages).map(lang => {
-        const opt = new Option(`${languages[lang].flag} ${languages[lang].name}`, lang);
+        const opt = new Option(`${languages[lang].flag} ${languages[lang].name}`, lang, browserLanguage === lang);
         select.add(opt);
     });
     select.addEventListener('change', (event) => {
-        fillCaptions(event.target.value);
         localStorage.setItem('current_language', event.target.value);
+        fillCaptions(event.target.value);
+        navigate();
     });
 
     navLanguageContainer.appendChild(select);
@@ -254,4 +255,7 @@ function fillCaptions(languageCode) {
     likedTitle.innerText = language.captions.favoritesTitle;
     // Left Menu
     leftMenuContainerTitle.innerText = language.captions.categoryTitle;
+}
+function getCurrentLanguage() {
+    return localStorage.getItem('current_language');
 }
