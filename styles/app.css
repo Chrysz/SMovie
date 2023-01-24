@@ -68,6 +68,13 @@ body {
     background: var(--gray);
     display: block;
 }
+.nav-container .languages select {
+    color: var(--white);
+    background-color: var(--blue-dark);
+    border: 1px solid;
+    border-color: var(--blue);
+    padding: 0.2rem;
+}
 /* navbar-lines */
 .nav-container .nav-left .nav-hamburger-menu .nav-hamburger-line .nav-line1 {
     transform-origin: 0% 0%;

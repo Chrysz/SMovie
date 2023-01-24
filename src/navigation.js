@@ -4,7 +4,7 @@ let page = 1;
 let infiniteScroll;
 
 // Button event
-navTitle.addEventListener('click', () => location.hash = '#home')
+navTitle.addEventListener('click', () => location.hash = '')
 searchInput.addEventListener('keypress', (e) => {
     if(e.key === 'Enter') {
         location.hash = `#search=${searchInput.value}`;
