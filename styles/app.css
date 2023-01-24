@@ -68,6 +68,13 @@ body {
     background: var(--gray);
     display: block;
 }
+.nav-container .languages select {
+    color: var(--white);
+    background-color: var(--blue-dark);
+    border: 1px solid;
+    border-color: var(--blue);
+    padding: 0.2rem;
+}
 /* navbar-lines */
 .nav-container .nav-left .nav-hamburger-menu .nav-hamburger-line .nav-line1 {
     transform-origin: 0% 0%;
@@ -210,9 +217,29 @@ body {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .trending-container .trending-preview img {
-    width: 190px;
-    height: 290px;
     cursor: pointer;
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
+}
+.trending-container .trending-preview .skeleton--loading {
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
+    background-color: var(--blue);
+    animation: loading-skeleton infinite 1.5s;
+}
+.trending-container .trending-preview .skeleton--loading:nth-child(2) {
+    animation-delay: .2s;
+}
+.trending-container .trending-preview .skeleton--loading:nth-child(3) {
+    animation-delay: .4s;
 }
 /*#endregion trending container*/
 /*#region trailer container*/
@@ -249,9 +276,32 @@ body {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .trailer-container .trailer-preview img {
-    width: 130px;
-    height: 200px;
     cursor: pointer;
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+}
+.trailer-container .trailer-preview .skeleton--loading {
+    background-color: var(--blue);
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.trailer-container .trailer-preview .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
 }
 /*#endregion trailer container*/
 /*#region movie detail*/
@@ -330,8 +380,32 @@ body {
 }
 .movieDetail-container .movieDetail-similar img {
     width: 120px;
+    min-width: 120px;
+    max-width: 120px;
     height: 190px;
+    min-height: 190px;
+    max-height: 190px;
     cursor: pointer;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading {
+    background: var(--blue);
+    cursor: pointer;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 190px;
+    min-height: 190px;
+    max-height: 190px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.movieDetail-container .movieDetail-similar .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
 }
 /*#endregion movie detail*/
 /*#region left-menu*/
@@ -345,7 +419,6 @@ body {
     bottom: 0;
     z-index: 1;
     box-shadow: 2px 0px 0px rgb(146 161 176 / 15%);
-    overflow-y: scroll;
 }
 .left-menu-container .left-menu-title {
     height: 50px;
@@ -392,9 +465,131 @@ body {
     height: 290px;
     cursor: pointer;
 }
+.generic-container .generic-preview .skeleton--loading {
+    cursor: pointer;
+    background-color: var(--blue);
+    width: 190px;
+    min-width: 190px;
+    max-width: 190px;
+    height: 290px;
+    min-height: 290px;
+    max-height: 290px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(2) {
+    animation-delay: .2s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(3) {
+    animation-delay: .4s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(4) {
+    animation-delay: .6s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(5) {
+    animation-delay: .8s;
+}
+.generic-container .generic-preview .skeleton--loading:nth-child(6) {
+    animation-delay: 1s;
+}
 /*#endregion generic-container*/
+/*#region liked container*/
+.liked-container {
+    padding: 10px;
+    padding-bottom: 25px;
+}
+.liked-container .liked-title {
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    color: var(--gray)
+}
+.liked-container .liked-preview {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 10px;
+    overflow-x: scroll;
+}
+.liked-container .liked-preview::-webkit-scrollbar {
+    height: 0px;
+}
+.liked-container .liked-preview:hover::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--blue);
+    border-radius: 5px;
+    border: .1px solid var(--blue-dark);
+}
+.liked-container .liked-preview::-webkit-scrollbar-thumb {
+    background: var(--blue-water);
+    border-radius: 5px;
+}
+.liked-container .liked-preview::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.liked-container .liked-preview img {
+    cursor: pointer;
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+}
+.liked-container .liked-preview .skeleton--loading {
+    background-color: var(--blue);
+    width: 130px;
+    min-width: 130px;
+    max-width: 130px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    animation: loading-skeleton infinite 1.5s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(2){
+    animation-delay: .2s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(3){
+    animation-delay: .4s;
+}
+.liked-container .liked-preview .skeleton--loading:nth-child(4){
+    animation-delay: .6s;
+}
+/*#endregion liked container*/
 
+.movie-container {
+    position: relative;
+}
+.movie-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-color: var(--white);
+    margin: 0;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 1, 0.5);
+}
+.movie-btn::before {
+    content: '🤍';
+}
+.movie-btn--liked {
+    border-color: red;
+}
+.movie-btn--liked::before {
+    content: '❤️';
+}
 
 .inactive {
     display: none !important;
+}
+
+/* Animations */
+@keyframes loading-skeleton {
+    0%, 100% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
+    }
 }

@@ -2,12 +2,13 @@
 const navbar = document.querySelector('.nav-container');
 const navTitle = document.querySelector('.nav-container .nav-title');
 const navChkHamburgerMenu = document.querySelector('.nav-container .nav-left .nav-hamburger-menu .nav-checkbox');
+const navLanguageContainer = document.querySelector('.nav-container .languages');
 //#endregion Navbar
 
 //#region Header Container
 const headerContainer = document.querySelector('.header-container');
 const headerArrowButton = document.querySelector('.header-container .category-arrow');
-const headerTittle = document.querySelector('.header-container .category-title');{}
+const headerTittle = document.querySelector('.header-container .category-title');
 //#endregion Header Container
 
 //#region Search Container
@@ -19,11 +20,13 @@ const searchButton = document.querySelector('.search-container .search-form > bu
 //#region Trending Container
 const trendingContainer = document.querySelector('.trending-container');
 const trendingPreview = document.querySelector('.trending-container .trending-preview');
+const trendingTitle = document.querySelector('.trending-container .trending-title-container .trending-title');
 const trendingButton = document.querySelector('.trending-container .trending-title-container .trending-view-more');
 //#endregion Trending Container
 
 //#region Trailer Container
 const trailerContainer = document.querySelector('.trailer-container');
+const trailerTitle = document.querySelector('.trailer-container .trailer-title');
 const trailerPreview = document.querySelector('.trailer-container .trailer-preview');
 //#endregion Trailer Container
 
@@ -43,6 +46,7 @@ const movieDetailSimilar = document.querySelector('.movieDetail-container .movie
 
 //#region Left Menu Container
 const leftMenuContainer = document.querySelector('.left-menu-container');
+const leftMenuContainerTitle = document.querySelector('.left-menu-container .left-menu-title text');
 const leftMenuCategories = document.querySelector('.left-menu-container .left-menu-categories');
 //#endregion Left Menu Container
 
@@ -50,3 +54,9 @@ const leftMenuCategories = document.querySelector('.left-menu-container .left-me
 const genericContainer = document.querySelector('.generic-container');
 const genericPreview = document.querySelector('.generic-container .generic-preview');
 //#endregion Generic Container
+
+//#region Liked Container
+const likedContainer = document.querySelector('.liked-container');
+const likedTitle = document.querySelector('.liked-container .liked-title');
+const likedPreview = document.querySelector('.liked-container .liked-preview');
+//#endregion Liked Container
